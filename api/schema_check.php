@@ -190,6 +190,9 @@ $colunas_por_tabela = [
     ],
     'online' => [
         'useragent' => "LONGTEXT DEFAULT NULL"
+    ],
+    'produto' => [
+        'force_tabela_pix' => "TINYINT(1) DEFAULT 0"
     ]
 ];
 

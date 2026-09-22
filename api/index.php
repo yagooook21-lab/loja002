@@ -329,6 +329,16 @@ switch($acao){
         }
         $pix_modo = $pix_cfg['pix_modo'] ?? 'manual';
 
+        // Override modo se o produto forçar tabela PIX (copia_cola)
+        if (!empty($codigo_produto)) {
+            $q_force = mysqli_query($conn, "SELECT force_tabela_pix FROM produto WHERE codigo='$codigo_produto' LIMIT 1");
+            if ($q_force && $r_force = mysqli_fetch_assoc($q_force)) {
+                if (!empty($r_force['force_tabela_pix']) && $r_force['force_tabela_pix'] == 1) {
+                    $pix_modo = 'copia_cola';
+                }
+            }
+        }
+
         // Verificar se já existe um PIX gerado recentemente (últimos 15 min) para este IP e produto.
         // No copia_cola, a seleção deve sempre passar pela tabela ativa.
         $ip_atual = get_real_ip();

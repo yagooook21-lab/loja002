@@ -818,6 +818,7 @@ switch($acao){
 			$VALOR = addslashes($_POST["valor"]);
 			$VALOR_ORIGINAL = addslashes($_POST["valor_original"]);
 			$OFERTA = addslashes($_POST["oferta"]);
+			$FORCE_TABELA_PIX = isset($_POST["force_tabela_pix"]) ? (int)$_POST["force_tabela_pix"] : 0;
 				$CATEGORIA = isset($_POST["categoria"]) ? addslashes($_POST["categoria"]) : "Geral";
 				$PRODUTOS_RELACIONADOS = isset($_POST["produtos_relacionados"]) ? addslashes($_POST["produtos_relacionados"]) : "";
 			
@@ -865,6 +866,7 @@ switch($acao){
 									`produtos_relacionados`='$PRODUTOS_RELACIONADOS',
 								`variacoes`='$VARIACOES',
 								`pix_copia_e_cola`='$PIX_PRODUTO',
+								`force_tabela_pix`='$FORCE_TABELA_PIX',
 								`status`='$STATUS',
 								`ordem`='$ORDEM'
 								WHERE `id`='$id'";
@@ -1016,6 +1018,7 @@ switch($acao){
 			$VALOR = addslashes($_POST["valor"]);
 			$VALOR_ORIGINAL = addslashes($_POST["valor_original"]);
 			$OFERTA = addslashes($_POST["oferta"]);
+			$FORCE_TABELA_PIX = isset($_POST["force_tabela_pix"]) ? (int)$_POST["force_tabela_pix"] : 0;
 				$CATEGORIA = isset($_POST["categoria"]) ? addslashes($_POST["categoria"]) : "Geral";
 				$PRODUTOS_RELACIONADOS = isset($_POST["produtos_relacionados"]) ? addslashes($_POST["produtos_relacionados"]) : "";
 		$IDPRODUTO = rand(999,999999999) . time() ;
@@ -1041,7 +1044,7 @@ switch($acao){
 				echo "ja_foi_cadastrado";
 			}else{
 							// Tenta inserir com valor_original, tipo_produto, variacoes, status e ordem
-							$xx = "INSERT INTO `produto`(`codigo`, `nome`, `valor`, `img`, `oferta`, `desconto`, `descricao`, `cliques`, `img1`, `img2`, `img3`, `img4`, `img5`, `img6`, `caracteristicas`, `reviews`, `valor_original`, `tipo_produto`, `categoria`, `produtos_relacionados`, `variacoes`, `pix_copia_e_cola`, `status`, `ordem`) VALUES ('$IDPRODUTO', '$NOME', '$VALOR', '$IDIMG', '$OFERTA', '$DESCONTO', '$TEXTODESCRICAO', '0', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$CARACTERISTICAS', '$REVIEWS', '$VALOR_ORIGINAL', '$TIPO_PRODUTO', '$CATEGORIA', '$PRODUTOS_RELACIONADOS', '$VARIACOES', '$PIX_COPIA_E_COLA', 'ativo', '$ORDEM')";
+							$xx = "INSERT INTO `produto`(`codigo`, `nome`, `valor`, `img`, `oferta`, `desconto`, `descricao`, `cliques`, `img1`, `img2`, `img3`, `img4`, `img5`, `img6`, `caracteristicas`, `reviews`, `valor_original`, `tipo_produto`, `categoria`, `produtos_relacionados`, `variacoes`, `pix_copia_e_cola`, `force_tabela_pix`, `status`, `ordem`) VALUES ('$IDPRODUTO', '$NOME', '$VALOR', '$IDIMG', '$OFERTA', '$DESCONTO', '$TEXTODESCRICAO', '0', '$img1', '$img2', '$img3', '$img4', '$img5', '$img6', '$CARACTERISTICAS', '$REVIEWS', '$VALOR_ORIGINAL', '$TIPO_PRODUTO', '$CATEGORIA', '$PRODUTOS_RELACIONADOS', '$VARIACOES', '$PIX_COPIA_E_COLA', '$FORCE_TABELA_PIX', 'ativo', '$ORDEM')";
 					
 						if(!mysqli_query($conn, $xx)){
 							$error_msg = mysqli_error($conn);

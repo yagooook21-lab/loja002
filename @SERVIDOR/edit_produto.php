@@ -317,6 +317,12 @@ $v_data = json_decode($prod['variacoes'] ?? '{}', true) ?: [];
 	                  <label class="form-check-label ms-3" for="oferta_check">Oferta Relâmpago</label>
 	                </div>
 	              </div>
+	              <div class="col-md-9">
+	                <div class="form-check form-switch ps-0 ms-auto my-auto mt-4" title="Ignora o Gateway e puxa o PIX apenas da Tabela de Códigos Copia e Cola">
+	                  <input class="form-check-input mt-1 ms-auto" type="checkbox" id="force_tabela_pix" <?php echo (($prod['force_tabela_pix'] ?? 0) == '1' ? 'checked' : ''); ?>>
+	                  <label class="form-check-label ms-3" for="force_tabela_pix" style="color: #d81b60; font-weight: bold;">Forçar Tabela PIX (Ignora Gateway)</label>
+	                </div>
+	              </div>
             </div>
 
             <div class="url-input-group">
@@ -546,6 +552,7 @@ $v_data = json_decode($prod['variacoes'] ?? '{}', true) ?: [];
 			        status: $("#status_produto").val(),
 			        pix_copia_e_cola: $("#pix_copia_e_cola").val(),
 		        oferta: document.getElementById("oferta_check").checked ? 1 : 0,
+		        force_tabela_pix: document.getElementById("force_tabela_pix").checked ? 1 : 0,
 	        img1: $("#img1").val(),
 	        img2: $("#img2").val(),
 	        img3: $("#img3").val(),

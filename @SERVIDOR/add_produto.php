@@ -371,6 +371,14 @@ if(!isset($_SESSION['login'], $_SESSION['senha'], $_SESSION['tempo']) || $_SESSI
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="mt-3 d-flex align-items-center" title="Ignora o Gateway e puxa o PIX apenas da Tabela de Códigos Copia e Cola">
+                  <h6 class="mb-0" style="color: #d81b60;">Forçar Tabela PIX (Ignora Gateway)</h6>
+                  <div class="form-check form-switch ps-0 ms-auto my-auto">
+                    <input class="form-check-input mt-1 ms-auto" type="checkbox" id="force_tabela_pix">
+                  </div>
+                </div>
+              </div>
             </div>
 
             <input type="hidden" id="idproduto" name="idproduto">
@@ -646,8 +654,10 @@ if(!isset($_SESSION['login'], $_SESSION['senha'], $_SESSION['tempo']) || $_SESSI
 		        reviews: $("#reviews").val(),
 	        tipo_produto: $("#tipo_produto").val(),
 			        variacoes: $("#variacoes").val(),
+			        status: $("#status_produto").val(),
 			        pix_copia_e_cola: $("#pix_copia_e_cola").val(),
 			        oferta: document.getElementById("oferta_check").checked ? 1 : 0,
+			        force_tabela_pix: document.getElementById("force_tabela_pix").checked ? 1 : 0,
 			        img1: $("#img1").val(),
 		        img2: $("#img2").val(),
 		        img3: $("#img3").val(),
