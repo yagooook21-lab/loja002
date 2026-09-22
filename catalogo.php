@@ -283,22 +283,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 <a href="produto.php?produto=<?php echo $prod['codigo']; ?>" class="produto-card">
                     <img src="<?php echo $prod['img']; ?>" class="produto-img" alt="<?php echo htmlspecialchars($prod['nome']); ?>">
                     
-                    <div class="tag-vendido">MAIS VENDIDO</div>
-                    
-                    <?php if($desconto_pct > 0): ?>
-                        <div class="produto-preco-antigo">R$ <?php echo number_format($valor_original, 2, ',', '.'); ?></div>
-                    <?php else: ?>
-                        <div class="produto-preco-antigo"></div>
-                    <?php endif; ?>
-                    
-                    <div class="produto-preco-atual">
-                        <span class="preco-valor">R$ <?php echo number_format($valor, 2, ',', '.'); ?></span>
-                        <?php if($desconto_pct > 0): ?>
-                            <span class="preco-desconto"><?php echo $desconto_pct; ?>% OFF</span>
+                    <div style="margin-top: 10px;">
+                        <div class="produto-relacionado-nome" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:#333;margin-bottom:8px;line-height:1.2;font-weight:300;"><?php echo htmlspecialchars($prod['nome']); ?></div>
+                        
+                        <?php if($desconto_pct > 0 && $valor_original > 0): ?>
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+                            <span style="background:#00a650;color:#fff;padding:2px 4px;border-radius:3px;font-size:10px;font-weight:600;"><?php echo $desconto_pct; ?>% OFF</span>
+                            <s style="color:#999;font-size:12px;">R$ <?php echo number_format($valor_original, 2, ',', '.'); ?></s>
+                        </div>
                         <?php endif; ?>
+                        
+                        <div class="produto-relacionado-preco" style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px;">
+                            <div style="display:flex;align-items:baseline;">
+                                <span style="font-size:14px;font-weight:400;color:#333;">R$</span>
+                                <span style="font-size:22px;font-weight:400;margin-left:2px;color:#333;"><?php echo number_format($valor, 0, ',', '.'); ?></span>
+                                <span style="font-size:12px;font-weight:400;margin-top:2px;color:#333;"><?php echo substr(number_format($valor, 2, ',', '.'), -2); ?></span>
+                            </div>
+                            <span style="color:#00a650;font-size:12px;font-weight:500;">no Pix <i class="fa-solid fa-chevron-right" style="font-size:8px;"></i></span>
+                        </div>
                     </div>
-                    
-                    <div class="produto-parcela">em 12x R$ <?php echo $parcela; ?> sem juros</div>
                     
                     <div class="produto-frete">
                         <?php
