@@ -402,11 +402,11 @@ header.compact-mode { padding: 6px 16px; }
 	@media (max-width: 480px) { .footer-links-container { gap: 8px; flex-direction: column; align-items: center; } .footer-link { font-size: 11px; display: block; margin-bottom: 4px; } .footer-copyright { font-size: 11px; text-align: center; } .footer-info { font-size: 10px; text-align: center; } }
 	.produto-card { background: #fff; margin-bottom: 8px; padding: 0; }
 	.produto-card, .variacoes-section, .preco-section, .vendedor-section, .caracteristicas-section, .detalhes-section, .descricao-section, .avaliacoes-section, .produtos-relacionados-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
-	.badges-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; padding: 0 16px; flex-wrap: wrap; }
-	.rating-row { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #666; }
-	.stars { color: var(--store-stars); font-size: 14px; }
-	.badge-mais-vendido { background: #f73; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 4px; border-radius: 3px; }
-	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); padding: 0 16px; }
+	.badges-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+	.pdp-px-16 { padding-left: 16px !important; padding-right: 16px !important; }
+	.rating-row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+	.tag-mais-vendido { background-color: var(--store-yellow); color: var(--color-text-primary); font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); }
 	.carousel-wrapper { position: relative; margin: 0 0 20px; }
 	.carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 	.carousel-track::-webkit-scrollbar { display: none; }
@@ -418,7 +418,7 @@ header.compact-mode { padding: 6px 16px; }
 	.carousel-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.05); padding: 2px 8px; border-radius: 10px; font-size: 12px; color: #666; }
 	
 	/* Estilos de Variações */
-	.variacoes-section { padding: 0 16px 20px; background: #fff; margin-bottom: 8px; }
+	.variacoes-section { padding-bottom: 20px; background: #fff; margin-bottom: 8px; }
 	.variacao-grupo { margin-bottom: 15px; }
 	.variacao-label { display: block; font-size: 14px; color: #333; margin-bottom: 10px; }
 	.variacao-opcoes { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -429,7 +429,7 @@ header.compact-mode { padding: 6px 16px; }
 	.btn-variacao-cor img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
 	.btn-variacao-cor.active { border-color: var(--store-blue); border-width: 2px; box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.2); }
 	
-	.preco-section { padding: 0 16px 20px; }
+	.preco-section { padding-bottom: 20px; }
 	.preco-original { font-size: var(--font-size-xsmall); color: var(--color-text-secondary); text-decoration: line-through; margin-bottom: 2px; }
 	.preco-atual-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
 	.preco-simbolo { font-size: var(--font-size-price); font-weight: var(--font-weight-light); margin-top: 0; color: var(--color-text-primary); }
@@ -751,7 +751,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <span>(102)</span>
         </div>
       </div>
-      <h1 class="produto-titulo"><?php echo htmlspecialchars($nomeproduto); ?></h1>
+      <h1 class="produto-titulo pdp-px-16"><?php echo htmlspecialchars($nomeproduto); ?></h1>
       <div class="carousel-wrapper">
         <div class="carousel-track" id="carouselTrack">
           <?php foreach($todas_imgs as $img_url): ?>
@@ -783,7 +783,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- COLUNA DIREITA (INFO E COMPRA) - COMUM OU ADAPTADA -->
     <div class="pdp-column-right">
       <div class="desktop-only">
-        <div class="badges-row" style="margin-bottom: 8px;">
+        <div class="badges-row pdp-px-16" style="margin-bottom: 8px;">
           <div class="rating-row">
             <span>Novo | +500 vendidos 4.9</span>
             <div class="stars">
@@ -792,14 +792,14 @@ document.addEventListener("DOMContentLoaded", function() {
             <span>(102)</span>
           </div>
         </div>
-        <div class="badges-row" style="padding-top: 0; margin-bottom: 15px;">
+        <div class="badges-row pdp-px-16" style="padding-top: 0; margin-bottom: 15px;">
           <span class="badge-mais-vendido">MAIS VENDIDO</span>
           <span style="color: var(--store-blue); font-size: 12px;">1º em <?php echo $nome; ?></span>
         </div>
-        <h1 class="produto-titulo" id="produtoTitulo"><?php echo htmlspecialchars($nomeproduto); ?></h1>
+        <h1 class="produto-titulo pdp-px-16" id="produtoTitulo"><?php echo htmlspecialchars($nomeproduto); ?></h1>
       </div>
 
-      <div class="preco-section">
+      <div class="preco-section pdp-px-16">
         <?php if($valor_original > $valor_total): ?>
         <div class="preco-original-linha" style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
           <?php if($desconto_num > 0): ?>
@@ -870,7 +870,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         
         <!-- ESTOQUE -->
-        <div class="estoque-section" style="margin-bottom: 20px; padding: 0 16px;">
+        <div class="estoque-section pdp-px-16" style="margin-bottom: 20px;">
           <p style="font-weight: 600; color: #333; margin-bottom: 10px; font-size: 14px;">Estoque disponível</p>
           <div class="seletor-quantidade" style="background: #f5f5f5; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
             <span style="font-size: 14px; color: #333;">Quantidade: <strong>1</strong> <span style="color: #999; font-weight: normal;">(+50 disponíveis)</span></span>
@@ -880,7 +880,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
 
       <?php if(!empty($variacoes)): ?>
-      <div class="variacoes-section">
+      <div class="variacoes-section pdp-px-16">
         <?php if(!empty($variacoes['cores_detalhes'])): ?>
         <div class="variacao-grupo">
           <span class="variacao-label">Cor: <strong id="label-cor"><?php echo htmlspecialchars($variacoes['cores_detalhes'][0]['nome']); ?></strong></span>
@@ -940,7 +940,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       <div class="ui-pdp-container__row ui-pdp-container__row--main-actions" id="main_actions" style="margin-top: 15px; margin-bottom: 5px;">
         <form class="ui-pdp-actions" method="get">
-          <div class="ui-pdp-actions__container" style="display: flex; flex-direction: column; gap: 8px; padding: 0 16px;">
+          <div class="ui-pdp-actions__container pdp-px-16" style="display: flex; flex-direction: column; gap: 8px;">
             <a href="checkout.php?produto=<?php echo $codigo; ?>" class="andes-button andes-spinner__icon-base ui-pdp-action--primary andes-button--loud btn-comprar" id="btnComprarPrincipal" style="display: flex; justify-content: center; align-items: center; background: #3483fa; color: #fff; height: 48px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; width: 100%; margin: 0; padding: 0;">
               <span class="andes-button__content">Comprar agora</span>
             </a>
