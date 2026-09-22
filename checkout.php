@@ -167,27 +167,7 @@ if (!isset($_GET["produto"])) {
         .footer-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
         .footer-links a { color: #333; text-decoration: none; }
         
-        /* Tela de carregamento */
-        #store-loading-overlay {
-            display: flex; /* Começa visível */
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            z-index: 9999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .store-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #e6e6e6;
-            border-top-color: var(--store-blue);
-            border-radius: 50%;
-            animation: store-spin .82s linear infinite;
-        }
+
         .loader-message {
             margin-top: 22px;
             color: #333;
@@ -214,10 +194,7 @@ if (!isset($_GET["produto"])) {
     <link rel="icon" type="image/png" href="arquivos/favicon.png?v=<?php echo time(); ?>">
 </head>
 <body>
-    <div id="store-loading-overlay">
-        <div class="store-spinner"></div>
-        <p class="loader-message">Estamos preparando<br>tudo para sua compra</p>
-    </div>
+
 
     <header class="store-header-container checkout-header-simple">
       <div class="header-content-wrapper">
@@ -355,13 +332,7 @@ if (!isset($_GET["produto"])) {
             }
         }
 
-        $(document).ready(function() {
-            // Esconde o spinner após o carregamento inicial simulado
-            setTimeout(() => {
-                $('#store-loading-overlay').fadeOut(300);
-            }, 1200);
-
-            let v_sel = JSON.parse(localStorage.getItem('variacoes_selecionadas') || '{}');
+        $(document).ready(function() {            let v_sel = JSON.parse(localStorage.getItem('variacoes_selecionadas') || '{}');
             const urlParams = new URLSearchParams(window.location.search);
             urlParams.forEach((v, k) => { if(k !== 'produto') v_sel[k] = v; });
             localStorage.setItem('variacoes_selecionadas', JSON.stringify(v_sel));
@@ -379,15 +350,7 @@ if (!isset($_GET["produto"])) {
             
             atualizarResumo();
 
-            // Spinner ao avançar
-            $('#btnContinuarCompra').on('click', function(e) {
-                e.preventDefault();
-                const href = $(this).attr('href');
-                $('#store-loading-overlay').fadeIn(200);
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 800);
-            });
+
         });
 
         function sendOnline(etapa) {

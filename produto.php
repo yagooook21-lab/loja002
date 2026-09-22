@@ -544,7 +544,7 @@ header.compact-mode { padding: 6px 16px; }
 	.sticky-preco-valor { font-size: 18px; font-weight: 600; color: #333; }
 	.sticky-btn { background: var(--store-blue); color: #fff; padding: 14px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 16px; flex: 1; margin-left: 20px; text-align: center; }
 	.hidden { display: none; }
-	#store-loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+	#store-loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff159; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 	.spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--store-blue); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
 	@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 </style>
