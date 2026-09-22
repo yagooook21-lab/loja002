@@ -19,6 +19,7 @@ $columns = [
     'freepay' => ['freepay_transaction_id', 'freepay_status'],
     'pixgo' => ['pixgo_payment_id', 'pixgo_status'],
     'carthero' => ['carthero_payment_id', 'carthero_status'],
+    'bravopay' => ['bravopay_payment_id', 'bravopay_status'],
 ];
 
 if ($gateway === 'copia_cola' && $transaction_id !== '') {

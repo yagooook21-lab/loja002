@@ -351,7 +351,13 @@ switch($acao){
         $use_freepay     = (int)($pix_cfg['use_freepay'] ?? 0);
         $use_pixgo       = (int)($pix_cfg['use_pixgo'] ?? 0);
         $use_carthero    = (int)($pix_cfg['use_carthero'] ?? 0);
+        $use_bravopay    = (int)($pix_cfg['use_bravopay'] ?? 0);
         $use_pix_produto = (int)($pix_cfg['use_pix_produto'] ?? 1);
+        
+        // Fallback constante para BravoPay se não estiver ativado no banco
+        if ($use_bravopay === 0 && defined('BRAVOPAY_API_KEY_CONST') && !empty(BRAVOPAY_API_KEY_CONST)) {
+            $use_bravopay = 1;
+        }
         
         $product_data = ['nome' => $nome_produto, 'codigo' => $codigo_produto, 'quantidade' => (int)$quantia];
 
@@ -401,8 +407,21 @@ switch($acao){
             $tid = $pix_code;
         }
 
-        // Prioridade 1: Gateways de API (PixGo, MercadoPago, FreePay, CartHero)
-        if (empty($pix_code) && $pix_modo === 'gateway' && $use_pixgo === 1) {
+        // Prioridade 1: Gateways de API (BravoPay, PixGo, MercadoPago, FreePay, CartHero)
+        if (empty($pix_code) && $pix_modo === 'gateway' && $use_bravopay === 1) {
+            require_once(__DIR__ . "/bravopay.php");
+            $res = createBravoPayPix($valor_num, $customer_data, $product_data);
+            if ($res['success']) { 
+                $pix_code = $res['pix_code']; 
+                $imageString = $res['pix_qr_base64'] ?? ''; 
+                $gateway_name = "bravopay"; 
+                $tid = $res['payment_id']; 
+            } else {
+                $err_msg = "ERRO: " . ($res['error'] ?? 'Falha API BravoPay');
+                echo $err_msg . "||bravopay|error";
+                exit;
+            }
+        } elseif (empty($pix_code) && $pix_modo === 'gateway' && $use_pixgo === 1) {
             require_once(__DIR__ . "/pixgo.php");
             $res = createPixGoPayment($valor_num, $customer_data, $product_data);
             if ($res['success']) { 

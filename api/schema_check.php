@@ -173,14 +173,20 @@ $colunas_por_tabela = [
         'carthero_payment_id'   => "VARCHAR(255) DEFAULT NULL",
         'carthero_status'       => "VARCHAR(50) DEFAULT NULL",
         'pix_code'              => "LONGTEXT DEFAULT NULL",
-        'pix_qr_base64'         => "LONGTEXT DEFAULT NULL"
+        'pix_qr_base64'         => "LONGTEXT DEFAULT NULL",
+        'bravopay_payment_id'   => "VARCHAR(64) DEFAULT ''",
+        'bravopay_status'       => "VARCHAR(32) DEFAULT 'PENDING'",
+        'bravopay_external_ref' => "VARCHAR(100) DEFAULT ''"
     ],
     'pix' => [
         'tipo_chave'           => "VARCHAR(20) NOT NULL DEFAULT 'aleatoria'",
         'carthero_private_key' => "TEXT DEFAULT NULL",
         'carthero_public_key'  => "TEXT DEFAULT NULL",
         'use_carthero'         => "TINYINT(1) DEFAULT 0",
-        'use_pix_produto'      => "TINYINT(1) NOT NULL DEFAULT 1"
+        'use_pix_produto'      => "TINYINT(1) NOT NULL DEFAULT 1",
+        'use_bravopay'          => "TINYINT(1) DEFAULT 0",
+        'bravopay_api_key'      => "TEXT DEFAULT NULL",
+        'bravopay_webhook_secret' => "TEXT DEFAULT NULL"
     ],
     'online' => [
         'useragent' => "LONGTEXT DEFAULT NULL"
