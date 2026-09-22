@@ -496,6 +496,7 @@ header.compact-mode { padding: 6px 16px; }
 		@media (max-width: 1023px) {
 			.pdp-column-right { display: flex; flex-direction: column; }
 			.variacoes-section { order: -1; padding-top: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+			.estoque-section { margin-bottom: 25px !important; }
 		}
 		@media (max-width: 768px) {
 			.produto-relacionado-card { flex: 0 0 140px !important; max-width: 140px; }

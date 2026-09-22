@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Iniciar Carrossel Produtos
     var swiperProdutos = new Swiper(".swiper-produtos", {
-        slidesPerView: 1.2,
+        slidesPerView: 2.3,
         spaceBetween: 10,
         navigation: {
             nextEl: ".swiper-produtos .swiper-button-next",
