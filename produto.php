@@ -400,14 +400,14 @@ header.compact-mode { padding: 6px 16px; }
 	.footer-info { font-size: 12px; color: #999; font-weight: 400; line-height: 1.4; margin: 0; }
 	@media (max-width: 768px) { .footer-main { padding: 30px 15px 20px; margin-top: 40px; } .footer-links-container { gap: 12px; justify-content: center; } .footer-link { font-size: 12px; display: inline-block; } .footer-copyright { font-size: 12px; text-align: center; } .footer-info { font-size: 11px; text-align: center; } }
 	@media (max-width: 480px) { .footer-links-container { gap: 8px; flex-direction: column; align-items: center; } .footer-link { font-size: 11px; display: block; margin-bottom: 4px; } .footer-copyright { font-size: 11px; text-align: center; } .footer-info { font-size: 10px; text-align: center; } }
-	.produto-card { background: #fff; margin-bottom: 8px; padding: 16px; }
+	.produto-card { background: #fff; margin-bottom: 8px; padding: 0; }
 	.produto-card, .variacoes-section, .preco-section, .vendedor-section, .caracteristicas-section, .detalhes-section, .descricao-section, .avaliacoes-section, .produtos-relacionados-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
-	.badges-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+	.badges-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; padding: 0 16px; flex-wrap: wrap; }
 	.rating-row { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #666; }
 	.stars { color: var(--store-stars); font-size: 14px; }
 	.badge-mais-vendido { background: #f73; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 4px; border-radius: 3px; }
-	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); }
-	.carousel-wrapper { position: relative; margin: 0 -16px 20px; }
+	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); padding: 0 16px; }
+	.carousel-wrapper { position: relative; margin: 0 0 20px; }
 	.carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 	.carousel-track::-webkit-scrollbar { display: none; }
 	.carousel-slide { min-width: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; background: #fff; height: 300px; }
@@ -418,7 +418,7 @@ header.compact-mode { padding: 6px 16px; }
 	.carousel-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.05); padding: 2px 8px; border-radius: 10px; font-size: 12px; color: #666; }
 	
 	/* Estilos de Variações */
-	.variacoes-section { padding: 0 0 20px; background: #fff; margin-bottom: 8px; }
+	.variacoes-section { padding: 0 16px 20px; background: #fff; margin-bottom: 8px; }
 	.variacao-grupo { margin-bottom: 15px; }
 	.variacao-label { display: block; font-size: 14px; color: #333; margin-bottom: 10px; }
 	.variacao-opcoes { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -429,7 +429,7 @@ header.compact-mode { padding: 6px 16px; }
 	.btn-variacao-cor img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
 	.btn-variacao-cor.active { border-color: var(--store-blue); border-width: 2px; box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.2); }
 	
-	.preco-section { padding: 0 0 20px; }
+	.preco-section { padding: 0 16px 20px; }
 	.preco-original { font-size: var(--font-size-xsmall); color: var(--color-text-secondary); text-decoration: line-through; margin-bottom: 2px; }
 	.preco-atual-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
 	.preco-simbolo { font-size: var(--font-size-price); font-weight: var(--font-weight-light); margin-top: 0; color: var(--color-text-primary); }
@@ -523,6 +523,8 @@ header.compact-mode { padding: 6px 16px; }
 	  body { padding-bottom: 0; }
 	  .produto-card { display: flex; flex-direction: column; padding: 20px; }
 	  .pdp-main-container { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
+	  .preco-section, .variacoes-section, .badges-row, .produto-titulo, .estoque-section { padding-left: 0 !important; padding-right: 0 !important; }
+	  .ui-pdp-actions__container { padding-left: 0 !important; padding-right: 0 !important; }
 	  .pdp-left-wrapper { display: flex; flex-direction: column; max-width: 600px; }
 	  .pdp-column-left { width: 60px; display: flex; flex-direction: column; gap: 10px; }
 	  .pdp-thumb { width: 50px; height: 50px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; object-fit: contain; padding: 2px; }
@@ -868,7 +870,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         
         <!-- ESTOQUE -->
-        <div class="estoque-section" style="margin-bottom: 20px;">
+        <div class="estoque-section" style="margin-bottom: 20px; padding: 0 16px;">
           <p style="font-weight: 600; color: #333; margin-bottom: 10px; font-size: 14px;">Estoque disponível</p>
           <div class="seletor-quantidade" style="background: #f5f5f5; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
             <span style="font-size: 14px; color: #333;">Quantidade: <strong>1</strong> <span style="color: #999; font-weight: normal;">(+50 disponíveis)</span></span>
@@ -938,7 +940,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       <div class="ui-pdp-container__row ui-pdp-container__row--main-actions" id="main_actions" style="margin-top: 15px; margin-bottom: 5px;">
         <form class="ui-pdp-actions" method="get">
-          <div class="ui-pdp-actions__container" style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="ui-pdp-actions__container" style="display: flex; flex-direction: column; gap: 8px; padding: 0 16px;">
             <a href="checkout.php?produto=<?php echo $codigo; ?>" class="andes-button andes-spinner__icon-base ui-pdp-action--primary andes-button--loud btn-comprar" id="btnComprarPrincipal" style="display: flex; justify-content: center; align-items: center; background: #3483fa; color: #fff; height: 48px; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; width: 100%; margin: 0; padding: 0;">
               <span class="andes-button__content">Comprar agora</span>
             </a>
