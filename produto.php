@@ -1061,7 +1061,10 @@ function expandirCaracteristicas() {
     </div>
   </div>
   <?php
-  $reviews = json_decode(stripslashes($reviews_json), true);
+  $reviews = json_decode($reviews_json, true);
+  if ($reviews === null && !empty($reviews_json)) {
+      $reviews = json_decode(stripslashes($reviews_json), true);
+  }
   if(empty($reviews)) {
     $reviews = [
       ["nome"=>"Cláudia Martins","data"=>"15/04/2026","estrelas"=>5,"titulo"=>"Superou todas as expectativas!","texto"=>"Produto incrível! Chegou antes do prazo, embalagem impecável e a qualidade é muito melhor do que eu esperava.","fotos"=>[$todas_imgs[0]]],
