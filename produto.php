@@ -418,7 +418,7 @@ header.compact-mode { padding: 6px 16px; }
 	.carousel-counter { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.05); padding: 2px 8px; border-radius: 10px; font-size: 12px; color: #666; }
 	
 	/* Estilos de Variações */
-	.variacoes-section { padding: 0 16px 20px; background: #fff; margin-bottom: 8px; }
+	.variacoes-section { padding: 0 0 20px; background: #fff; margin-bottom: 8px; }
 	.variacao-grupo { margin-bottom: 15px; }
 	.variacao-label { display: block; font-size: 14px; color: #333; margin-bottom: 10px; }
 	.variacao-opcoes { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -429,7 +429,7 @@ header.compact-mode { padding: 6px 16px; }
 	.btn-variacao-cor img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
 	.btn-variacao-cor.active { border-color: var(--store-blue); border-width: 2px; box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.2); }
 	
-	.preco-section { padding: 0 16px 20px; }
+	.preco-section { padding: 0 0 20px; }
 	.preco-original { font-size: var(--font-size-xsmall); color: var(--color-text-secondary); text-decoration: line-through; margin-bottom: 2px; }
 	.preco-atual-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
 	.preco-simbolo { font-size: var(--font-size-price); font-weight: var(--font-weight-light); margin-top: 0; color: var(--color-text-primary); }
@@ -495,7 +495,6 @@ header.compact-mode { padding: 6px 16px; }
 		.produto-relacionado-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
 		@media (max-width: 1023px) {
 			.pdp-column-right { display: flex; flex-direction: column; }
-			.preco-section, .variacoes-section { padding-left: 0 !important; padding-right: 0 !important; }
 			.variacoes-section { order: -1; padding-top: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
 			.estoque-section { margin-bottom: 0 !important; }
 			.ui-pdp-container__row--main-actions { margin-top: 8px !important; }
