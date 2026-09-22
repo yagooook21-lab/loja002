@@ -403,10 +403,10 @@ header.compact-mode { padding: 6px 16px; }
 	.produto-card { background: #fff; margin-bottom: 8px; padding: 0; }
 	.produto-card, .variacoes-section, .preco-section, .vendedor-section, .caracteristicas-section, .detalhes-section, .descricao-section, .avaliacoes-section, .produtos-relacionados-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
 	.badges-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
-	.pdp-px-16 { padding-left: 16px !important; padding-right: 16px !important; }
+	.preco-section, .variacoes-section, .badges-row, .estoque-section, .ui-pdp-actions__container { padding-left: 0 !important; padding-right: 0 !important; }
 	.rating-row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
 	.tag-mais-vendido { background-color: var(--store-yellow); color: var(--color-text-primary); font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; display: inline-block; }
-	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); }
+	.produto-titulo { font-size: var(--font-size-product-title); font-weight: var(--font-weight-semibold); line-height: 1.18; margin-bottom: 8px; color: var(--color-text-primary); padding: 0 16px; }
 	.carousel-wrapper { position: relative; margin: 0 0 20px; }
 	.carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 	.carousel-track::-webkit-scrollbar { display: none; }
@@ -494,7 +494,7 @@ header.compact-mode { padding: 6px 16px; }
 		.produto-relacionado-card { flex: 0 0 200px; scroll-snap-align: start; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; color: inherit; text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s; }
 		.produto-relacionado-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
 		@media (max-width: 1023px) {
-			.pdp-column-right { display: flex; flex-direction: column; }
+			.pdp-column-right { display: flex; flex-direction: column; padding: 0 16px; }
 			.variacoes-section { order: -1; padding-top: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
 			.estoque-section { margin-bottom: 0 !important; }
 			.ui-pdp-container__row--main-actions { margin-top: 8px !important; }
