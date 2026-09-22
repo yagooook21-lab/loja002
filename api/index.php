@@ -411,6 +411,12 @@ switch($acao){
             }
         }
 
+        // Se o modo copia_cola não encontrou nenhum código disponível para esse valor exato,
+        // restauramos o modo original (ex: gateway) para que a venda não seja perdida.
+        if ($pix_modo === 'copia_cola' && empty($pix_code)) {
+            $pix_modo = $pix_cfg['pix_modo'] ?? 'manual';
+        }
+
         // No modo copia e cola, o próprio código da tabela identifica o
         // pagamento que o administrador poderá marcar como PAGO no painel.
         if ($gateway_name === 'copia_cola' && $pix_code !== '') {
