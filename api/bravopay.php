@@ -108,6 +108,9 @@ function createBravoPayPix($valor, $customer_data, $product_data) {
     }
 
     $res_data = json_decode($response, true);
+    
+    // Log para debug
+    file_put_contents(__DIR__ . '/debug_bravopay.log', date('Y-m-d H:i:s') . " - HTTP: $http_code - Response: $response\n", FILE_APPEND);
 
     if ($http_code >= 200 && $http_code < 300 && isset($res_data['pix']['copy_paste'])) {
         $pix_code = $res_data['pix']['copy_paste'];
@@ -143,7 +146,17 @@ function createBravoPayPix($valor, $customer_data, $product_data) {
             'payment_id' => $payment_id
         ];
     } else {
-        $msg_erro = $res_data['message'] ?? 'Erro desconhecido na API BravoPay.';
+        $raw_response_safe = strip_tags(substr($response, 0, 150));
+        
+        $msg_erro = 'Erro na API BravoPay.';
+        if (isset($res_data['error']['message'])) {
+            $msg_erro = $res_data['error']['message'];
+        } elseif (isset($res_data['message'])) {
+            $msg_erro = $res_data['message'];
+        } else {
+            $msg_erro = "HTTP $http_code. Retorno: " . $raw_response_safe;
+        }
+
         return ['success' => false, 'error' => $msg_erro, 'response' => $response];
     }
 }
