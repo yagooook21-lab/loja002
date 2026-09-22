@@ -493,6 +493,9 @@ header.compact-mode { padding: 6px 16px; }
 		.produtos-relacionados-track::-webkit-scrollbar { display: none; }
 		.produto-relacionado-card { flex: 0 0 200px; scroll-snap-align: start; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; color: inherit; text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s; }
 		.produto-relacionado-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+		@media (max-width: 768px) {
+			.produto-relacionado-card { flex: 0 0 calc(100vw - 70px) !important; max-width: calc(100vw - 70px); }
+		}
 		.produto-relacionado-img-wrap { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; background: #fff; border-bottom: 1px solid #ebebeb; padding: 10px; }
 		.produto-relacionado-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 		.produto-relacionado-info { padding: 12px; display: flex; flex-direction: column; }
