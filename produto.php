@@ -493,6 +493,10 @@ header.compact-mode { padding: 6px 16px; }
 		.produtos-relacionados-track::-webkit-scrollbar { display: none; }
 		.produto-relacionado-card { flex: 0 0 200px; scroll-snap-align: start; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; color: inherit; text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s; }
 		.produto-relacionado-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+		@media (max-width: 1023px) {
+			.pdp-column-right { display: flex; flex-direction: column; }
+			.variacoes-section { order: -1; padding-top: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+		}
 		@media (max-width: 768px) {
 			.produto-relacionado-card { flex: 0 0 140px !important; max-width: 140px; }
 		}
