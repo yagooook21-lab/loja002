@@ -628,6 +628,30 @@ $pix_max_itens = $pix['pix_max_itens'] ?? 4;
                     </div>
                   </div>
 
+                  <!-- BRAVOPAY -->
+                  <div class="form-section" style="border-left-color: #ff3366;">
+                    <h6><i class="material-icons" style="color:#ff3366">favorite</i> BravoPay (Automático)</h6>
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="use_bravopay" onchange="exclusivoGateway('bravopay')" <?php echo ($pix['use_bravopay'] ?? 0) == 1 ? 'checked' : ''; ?>>
+                      <label class="form-check-label mb-0 ms-3" for="use_bravopay">Ativar Gateway BravoPay</label>
+                    </div>
+                    <div id="bravopay_fields" style="<?php echo ($pix['use_bravopay'] ?? 0) == 1 ? '' : 'display:none;'; ?>">
+                      <div class="input-group input-group-outline my-3 is-filled">
+                        <label class="form-label">API Key (bp_live_...)</label>
+                        <input type="text" class="form-control" id="bravopay_api_key" value="<?php echo htmlspecialchars($pix['bravopay_api_key'] ?? ''); ?>">
+                      </div>
+                      <div class="input-group input-group-outline my-3 is-filled">
+                        <label class="form-label">Webhook Secret (Opcional)</label>
+                        <input type="text" class="form-control" id="bravopay_webhook_secret" value="<?php echo htmlspecialchars($pix['bravopay_webhook_secret'] ?? ''); ?>">
+                      </div>
+                      <div class="webhook-box">
+                        <strong>URL do Webhook para BravoPay:</strong>
+                        <code id="bravopay_webhook_url"></code>
+                        <small class="text-muted">Configure no painel da BravoPay.</small>
+                      </div>
+                    </div>
+                  </div>
+
                 </div><!-- /secao_gateway -->
 
                 <!-- BOTÃO SALVAR -->
@@ -745,10 +769,19 @@ $pix_max_itens = $pix['pix_max_itens'] ?? 4;
   $(document).ready(function() {
     var currentPath = window.location.pathname;
     var storePath = currentPath.substring(0, currentPath.lastIndexOf('/@SERVIDOR'));
-    var baseUrl = window.location.protocol + '//' + window.location.host + storePath;
-    $('#pixgo_webhook_url').text(baseUrl + '/api/webhook_pixgo.php');
-    $('#mp_webhook_url').text(baseUrl + '/api/webhook_mercadopago.php');
-    $('#carthero_webhook_url').text(baseUrl + '/api/webhook_carthero.php');
+    var baseHost = window.location.protocol + "//" + window.location.host;
+    var pathUrl = window.location.pathname.replace('/@SERVIDOR/pix.php', '').replace('/@SERVIDOR/pix', '').replace('/@SERVIDOR/', '');
+    if (pathUrl && pathUrl !== '/') {
+      baseHost += (pathUrl.startsWith('/') ? pathUrl : '/' + pathUrl);
+    }
+    
+    // Remove slash extra no final se houver
+    if (baseHost.endsWith('/')) baseHost = baseHost.slice(0, -1);
+
+    $('#pixgo_webhook_url').text(baseHost + '/api/webhook_pixgo.php');
+    $('#mp_webhook_url').text(baseHost + '/api/webhook_mercadopago.php');
+    $('#carthero_webhook_url').text(baseHost + '/api/webhook_carthero.php');
+    $('#bravopay_webhook_url').text(baseHost + '/api/webhook_bravopay.php');
   });
 
   // ===== TOAST HELPERS =====
@@ -782,23 +815,23 @@ $pix_max_itens = $pix['pix_max_itens'] ?? 4;
   }
 
   // ===== GATEWAY EXCLUSIVO =====
-  function exclusivoGateway(ativado) {
-    if (ativado === 'pixgo' && $('#use_pixgo').is(':checked')) {
-      $('#use_mercadopago, #use_freepay, #use_carthero').prop('checked', false);
+  function exclusivoGateway(gatewayId) {
+    var checkBoxes = ['use_pixgo', 'use_mercadopago', 'use_freepay', 'use_carthero', 'use_bravopay'];
+    
+    if ($('#use_' + gatewayId).is(':checked')) {
+      checkBoxes.forEach(function(id) {
+        if (id !== 'use_' + gatewayId) {
+          $('#' + id).prop('checked', false);
+        }
+      });
     }
-    if (ativado === 'mercadopago' && $('#use_mercadopago').is(':checked')) {
-      $('#use_pixgo, #use_freepay, #use_carthero').prop('checked', false);
-    }
-    if (ativado === 'freepay' && $('#use_freepay').is(':checked')) {
-      $('#use_pixgo, #use_mercadopago, #use_carthero').prop('checked', false);
-    }
-    if (ativado === 'carthero' && $('#use_carthero').is(':checked')) {
-      $('#use_pixgo, #use_mercadopago, #use_freepay').prop('checked', false);
-    }
+    
+    // Mostra as configs apenas do selecionado
     $('#pixgo_fields').toggle($('#use_pixgo').is(':checked'));
     $('#mp_fields').toggle($('#use_mercadopago').is(':checked'));
     $('#freepay_fields').toggle($('#use_freepay').is(':checked'));
     $('#carthero_fields').toggle($('#use_carthero').is(':checked'));
+    $('#bravopay_fields').toggle($('#use_bravopay').is(':checked'));
   }
 
   // ===== SALVAR CONFIG GERAL =====
@@ -822,6 +855,9 @@ $pix_max_itens = $pix['pix_max_itens'] ?? 4;
       carthero_private_key: $("#carthero_private_key").val(),
       carthero_public_key: $("#carthero_public_key").val(),
       use_carthero: $("#use_carthero").is(':checked') ? 1 : 0,
+      bravopay_api_key: $("#bravopay_api_key").val(),
+      bravopay_webhook_secret: $("#bravopay_webhook_secret").val(),
+      use_bravopay: $("#use_bravopay").is(':checked') ? 1 : 0,
       use_pix_produto: 0
     };
     var payload = btoa(unescape(encodeURIComponent(JSON.stringify(dados))));

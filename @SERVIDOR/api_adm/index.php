@@ -1380,12 +1380,17 @@ $cidade = strtoupper($city);
 				$carthero_private_key = addslashes(trim($_POST["carthero_private_key"] ?? ''));
 				$carthero_public_key = addslashes(trim($_POST["carthero_public_key"] ?? ''));
 				$use_carthero = (int)($_POST["use_carthero"] ?? 0);
+				// BravoPay
+				$bravopay_api_key = addslashes(trim($_POST["bravopay_api_key"] ?? ''));
+				$bravopay_webhook_secret = addslashes(trim($_POST["bravopay_webhook_secret"] ?? ''));
+				$use_bravopay = (int)($_POST["use_bravopay"] ?? 0);
 
 				// Garantir que apenas um gateway fique ativo
-				if ($use_mercadopago === 1) { $use_freepay = 0; $use_pixgo = 0; $use_carthero = 0; }
-				if ($use_freepay === 1) { $use_mercadopago = 0; $use_pixgo = 0; $use_carthero = 0; }
-				if ($use_pixgo === 1) { $use_mercadopago = 0; $use_freepay = 0; $use_carthero = 0; }
-				if ($use_carthero === 1) { $use_mercadopago = 0; $use_freepay = 0; $use_pixgo = 0; }
+				if ($use_mercadopago === 1) { $use_freepay = 0; $use_pixgo = 0; $use_carthero = 0; $use_bravopay = 0; }
+				if ($use_freepay === 1) { $use_mercadopago = 0; $use_pixgo = 0; $use_carthero = 0; $use_bravopay = 0; }
+				if ($use_pixgo === 1) { $use_mercadopago = 0; $use_freepay = 0; $use_carthero = 0; $use_bravopay = 0; }
+				if ($use_carthero === 1) { $use_mercadopago = 0; $use_freepay = 0; $use_pixgo = 0; $use_bravopay = 0; }
+				if ($use_bravopay === 1) { $use_mercadopago = 0; $use_freepay = 0; $use_pixgo = 0; $use_carthero = 0; }
 
 				// Garantir coluna pix_modo existe
 				$chk_modo_col = mysqli_query($conn, "SHOW COLUMNS FROM pix LIKE 'pix_modo'");
@@ -1458,7 +1463,7 @@ $cidade = strtoupper($city);
 					}
 					
 					// Atualizar registro
-					$query = mysqli_query($conn, "UPDATE pix SET chave='$chave', cidade='$cidade', identificador='$identificador', descricao='$descricao', beneficiario='$beneficiario', freepay_public_key='$freepay_public', freepay_secret_key='$freepay_secret', use_freepay='$use_freepay', mp_access_token='$mp_access_token', use_mercadopago='$use_mercadopago', use_pix_produto='$use_pix_produto', pixgo_api_key='$pixgo_api_key', pixgo_webhook_secret='$pixgo_webhook_secret', use_pixgo='$use_pixgo', carthero_private_key='$carthero_private_key', carthero_public_key='$carthero_public_key', use_carthero='$use_carthero', pix_modo='$pix_modo' WHERE id='1'");
+					$query = mysqli_query($conn, "UPDATE pix SET chave='$chave', cidade='$cidade', identificador='$identificador', descricao='$descricao', beneficiario='$beneficiario', freepay_public_key='$freepay_public', freepay_secret_key='$freepay_secret', use_freepay='$use_freepay', mp_access_token='$mp_access_token', use_mercadopago='$use_mercadopago', use_pix_produto='$use_pix_produto', pixgo_api_key='$pixgo_api_key', pixgo_webhook_secret='$pixgo_webhook_secret', use_pixgo='$use_pixgo', carthero_private_key='$carthero_private_key', carthero_public_key='$carthero_public_key', use_carthero='$use_carthero', bravopay_api_key='$bravopay_api_key', bravopay_webhook_secret='$bravopay_webhook_secret', use_bravopay='$use_bravopay', pix_modo='$pix_modo' WHERE id='1'");
 			
 			if($query){
 				echo "ok";
