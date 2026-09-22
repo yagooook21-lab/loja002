@@ -495,12 +495,14 @@ header.compact-mode { padding: 6px 16px; }
 		.produto-relacionado-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
 		@media (max-width: 1023px) {
 			.pdp-column-right { display: flex; flex-direction: column; }
+			.preco-section, .variacoes-section { padding-left: 0 !important; padding-right: 0 !important; }
 			.variacoes-section { order: -1; padding-top: 10px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
 			.estoque-section { margin-bottom: 0 !important; }
 			.ui-pdp-container__row--main-actions { margin-top: 8px !important; }
 		}
 		@media (max-width: 768px) {
-			.produto-relacionado-card { flex: 0 0 140px !important; max-width: 140px; }
+			.produto-relacionado-card { flex: 0 0 160px !important; max-width: 160px; }
+			.produto-relacionado-imagem { height: 160px; }
 		}
 		.produto-relacionado-img-wrap { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; background: #fff; border-bottom: 1px solid #ebebeb; padding: 10px; }
 		.produto-relacionado-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
