@@ -18,6 +18,18 @@ function getBravoPayConfig() {
     return ['active' => false, 'api_key' => '', 'webhook_secret' => ''];
 }
 
+function gerarCpfFicticio() {
+    $n = [];
+    for ($i = 0; $i < 9; $i++) $n[$i] = rand(0, 9);
+    $d1 = $n[8]*2 + $n[7]*3 + $n[6]*4 + $n[5]*5 + $n[4]*6 + $n[3]*7 + $n[2]*8 + $n[1]*9 + $n[0]*10;
+    $d1 = 11 - ($d1 % 11);
+    if ($d1 >= 10) $d1 = 0;
+    $d2 = $d1*2 + $n[8]*3 + $n[7]*4 + $n[6]*5 + $n[5]*6 + $n[4]*7 + $n[3]*8 + $n[2]*9 + $n[1]*10 + $n[0]*11;
+    $d2 = 11 - ($d2 % 11);
+    if ($d2 >= 10) $d2 = 0;
+    return implode('', $n) . $d1 . $d2;
+}
+
 function createBravoPayPix($valor, $customer_data, $product_data) {
     global $conn;
     
@@ -41,15 +53,31 @@ function createBravoPayPix($valor, $customer_data, $product_data) {
 
     $cpf = preg_replace('/\D/', '', $customer_data['cpf'] ?? '');
     $phone = preg_replace('/\D/', '', $customer_data['telefone'] ?? '');
+    
+    // Auto-preenchimento
+    if (empty($cpf) || strlen($cpf) != 11) {
+        $cpf = gerarCpfFicticio();
+    }
+    
+    $email = trim($customer_data['email'] ?? '');
+    if (empty($email) || strpos($email, '@') === false) {
+        $rand_str = substr(md5(uniqid(rand(), true)), 0, 8);
+        $email = "cliente_{$rand_str}@comprador.com.br";
+    }
+
+    $nome = trim($customer_data['nome'] ?? '');
+    if (empty($nome)) {
+        $nome = 'Cliente ' . substr(md5(uniqid()), 0, 5);
+    }
 
     $payload = [
         "amount_cents" => $amount_cents,
         "method" => "pix",
         "customer" => [
-            "name" => $customer_data['nome'] ?? 'Cliente Padrão',
-            "email" => $customer_data['email'] ?? 'cliente@sememail.com',
+            "name" => $nome,
+            "email" => $email,
             "phone" => !empty($phone) ? $phone : '5511999999999',
-            "cpf" => !empty($cpf) ? $cpf : '00000000000'
+            "cpf" => $cpf
         ]
     ];
 
