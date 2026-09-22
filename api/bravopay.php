@@ -118,27 +118,6 @@ function createBravoPayPix($valor, $customer_data, $product_data) {
         $payment_id = $res_data['id'] ?? '';
         $ext_ref = $res_data['external_reference'] ?? '';
 
-        // Salvar na tabela pixgerado
-        $ip_atual = get_real_ip();
-        $hora = date('H:i:s');
-        $tempo = time();
-        $prod_codigo = addslashes($product_data['codigo'] ?? '');
-        $prod_nome = addslashes($product_data['nome'] ?? '');
-        $cli_nome = addslashes($customer_data['nome'] ?? '');
-        $cli_email = addslashes($customer_data['email'] ?? '');
-        $cli_cpf = addslashes($customer_data['cpf'] ?? '');
-        $cli_phone = addslashes($customer_data['telefone'] ?? '');
-        $variacoes = addslashes($_SESSION['cliente_dados']['variacoes'] ?? '');
-
-        // Previne XSS/SQLI no retorno do pixcode se gravado
-        $pix_code_safe = addslashes($pix_code);
-        $qr_base64_safe = addslashes($qr_base64);
-
-        mysqli_query($conn, "INSERT INTO pixgerado 
-            (ip, valor, produto, produto_nome, cliente_nome, cliente_telefone, cliente_cpf, cliente_email, status, hora, time, variacoes, pix_code, pix_qr_base64, bravopay_payment_id, bravopay_status, bravopay_external_ref) 
-            VALUES 
-            ('$ip_atual', '$valor', '$prod_codigo', '$prod_nome', '$cli_nome', '$cli_phone', '$cli_cpf', '$cli_email', 'pendente', '$hora', '$tempo', '$variacoes', '$pix_code_safe', '$qr_base64_safe', '$payment_id', 'PENDING', '$ext_ref')");
-
         return [
             'success' => true,
             'pix_code' => $pix_code,
