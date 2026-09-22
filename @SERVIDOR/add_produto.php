@@ -617,7 +617,8 @@ if(!isset($_SESSION['login'], $_SESSION['senha'], $_SESSION['tempo']) || $_SESSI
 	      var reviews = [];
 	      for(var i=1; i<=5; i++) {
 	        var nome = $("#rev_nome_"+i).val();
-	        if(nome) {
+	        var texto = $("#rev_texto_"+i).val();
+	        if(nome && texto && texto.trim() !== '') {
 	          var fotos = [];
 	          if($("#rev_foto1_"+i).val()) fotos.push($("#rev_foto1_"+i).val());
 	          if($("#rev_foto2_"+i).val()) fotos.push($("#rev_foto2_"+i).val());
@@ -628,7 +629,7 @@ if(!isset($_SESSION['login'], $_SESSION['senha'], $_SESSION['tempo']) || $_SESSI
 	            data: $("#rev_data_"+i).val(),
 	            estrelas: parseInt($("#rev_estrelas_"+i).val()),
 	            titulo: $("#rev_titulo_"+i).val(),
-	            texto: $("#rev_texto_"+i).val(),
+	            texto: texto,
 	            fotos: fotos
 	          });
 	        }
