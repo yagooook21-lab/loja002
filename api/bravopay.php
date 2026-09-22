@@ -81,11 +81,11 @@ function createBravoPayPix($valor, $customer_data, $product_data) {
 
     $res_data = json_decode($response, true);
 
-    if ($http_code >= 200 && $http_code < 300 && isset($res_data['transaction']['pix_code'])) {
-        $pix_code = $res_data['transaction']['pix_code'];
-        $qr_base64 = $res_data['transaction']['pix_qr_base64'] ?? '';
-        $payment_id = $res_data['transaction']['id'] ?? '';
-        $ext_ref = $res_data['transaction']['external_reference'] ?? '';
+    if ($http_code >= 200 && $http_code < 300 && isset($res_data['pix']['copy_paste'])) {
+        $pix_code = $res_data['pix']['copy_paste'];
+        $qr_base64 = $res_data['pix']['qr_base64'] ?? ''; // Verifica se retornam base64, se não, deixamos vazio pois o success.php gera via QRServer
+        $payment_id = $res_data['id'] ?? '';
+        $ext_ref = $res_data['external_reference'] ?? '';
 
         // Salvar na tabela pixgerado
         $ip_atual = get_real_ip();

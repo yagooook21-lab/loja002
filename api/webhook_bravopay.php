@@ -40,9 +40,19 @@ if (!$data || !isset($data['event']) || !isset($data['data']['transaction'])) {
     exit;
 }
 
-$event = $data['event'];
-$transaction = $data['data']['transaction'];
-$payment_id = addslashes($transaction['id'] ?? '');
+$event = $data['event'] ?? '';
+$payment_id = '';
+if (isset($data['data']['transaction']['id'])) {
+    $payment_id = $data['data']['transaction']['id'];
+} elseif (isset($data['data']['id'])) {
+    $payment_id = $data['data']['id'];
+} elseif (isset($data['transaction']['id'])) {
+    $payment_id = $data['transaction']['id'];
+} elseif (isset($data['id'])) {
+    $payment_id = $data['id'];
+}
+
+$payment_id = addslashes((string)$payment_id);
 
 if (empty($payment_id)) {
     http_response_code(400);
