@@ -696,9 +696,25 @@ document.addEventListener("DOMContentLoaded", function() {
                   <img src="<?php echo $outro['img']; ?>" alt="<?php echo htmlspecialchars($outro['nome']); ?>" class="produto-relacionado-img" loading="lazy">
                 </div>
                 <div class="produto-relacionado-info">
-                  <div class="produto-relacionado-nome"><?php echo htmlspecialchars($outro['nome']); ?></div>
-                  <div class="produto-relacionado-preco">R$ <?php echo number_format($outro_valor, 2, ',', '.'); ?></div>
-                  <div class="produto-relacionado-parcela">10x R$ <?php echo number_format($outro_valor / 10, 2, ',', '.'); ?> sem juros</div>
+                  <div class="produto-relacionado-nome" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:#333;margin-bottom:8px;line-height:1.2;font-weight:300;"><?php echo htmlspecialchars($outro['nome']); ?></div>
+                  <?php 
+                    $outro_original = !empty($outro['valor_original']) ? (float)str_replace(',', '.', str_replace('.', '', $outro['valor_original'])) : 0;
+                    $outro_desconto = !empty($outro['desconto']) ? str_replace('%', '', $outro['desconto']) : '';
+                    if ($outro_original > 0 && !empty($outro_desconto)):
+                  ?>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+                    <span style="background:#00a650;color:#fff;padding:2px 4px;border-radius:3px;font-size:10px;font-weight:600;"><?php echo $outro_desconto; ?>% OFF</span>
+                    <s style="color:#999;font-size:12px;">R$ <?php echo number_format($outro_original, 2, ',', '.'); ?></s>
+                  </div>
+                  <?php endif; ?>
+                  <div class="produto-relacionado-preco" style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px;">
+                    <div style="display:flex;align-items:baseline;">
+                      <span style="font-size:14px;font-weight:400;color:#333;">R$</span>
+                      <span style="font-size:22px;font-weight:400;margin-left:2px;color:#333;"><?php echo number_format($outro_valor, 0, ',', '.'); ?></span>
+                      <span style="font-size:12px;font-weight:400;margin-top:2px;color:#333;"><?php echo substr(number_format($outro_valor, 2, ',', '.'), -2); ?></span>
+                    </div>
+                    <span style="color:#00a650;font-size:12px;font-weight:500;">no Pix <i class="fa-solid fa-chevron-right" style="font-size:8px;"></i></span>
+                  </div>
                   <div class="produto-relacionado-entrega"><span class="frete-destaque">Frete grátis ⚡ <i>FULL</i></span></div>
                 </div>
               </a>
@@ -951,9 +967,25 @@ document.addEventListener("DOMContentLoaded", function() {
               <img src="<?php echo $outro['img']; ?>" alt="<?php echo htmlspecialchars($outro['nome']); ?>" class="produto-relacionado-img" loading="lazy">
             </div>
             <div class="produto-relacionado-info">
-              <div class="produto-relacionado-nome"><?php echo htmlspecialchars($outro['nome']); ?></div>
-              <div class="produto-relacionado-preco">R$ <?php echo number_format($outro_valor, 2, ',', '.'); ?></div>
-              <div class="produto-relacionado-parcela">10x R$ <?php echo number_format($outro_valor / 10, 2, ',', '.'); ?> sem juros</div>
+              <div class="produto-relacionado-nome" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:#333;margin-bottom:8px;line-height:1.2;font-weight:300;"><?php echo htmlspecialchars($outro['nome']); ?></div>
+              <?php 
+                $outro_original = !empty($outro['valor_original']) ? (float)str_replace(',', '.', str_replace('.', '', $outro['valor_original'])) : 0;
+                $outro_desconto = !empty($outro['desconto']) ? str_replace('%', '', $outro['desconto']) : '';
+                if ($outro_original > 0 && !empty($outro_desconto)):
+              ?>
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+                <span style="background:#00a650;color:#fff;padding:2px 4px;border-radius:3px;font-size:10px;font-weight:600;"><?php echo $outro_desconto; ?>% OFF</span>
+                <s style="color:#999;font-size:12px;">R$ <?php echo number_format($outro_original, 2, ',', '.'); ?></s>
+              </div>
+              <?php endif; ?>
+              <div class="produto-relacionado-preco" style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px;">
+                <div style="display:flex;align-items:baseline;">
+                  <span style="font-size:14px;font-weight:400;color:#333;">R$</span>
+                  <span style="font-size:22px;font-weight:400;margin-left:2px;color:#333;"><?php echo number_format($outro_valor, 0, ',', '.'); ?></span>
+                  <span style="font-size:12px;font-weight:400;margin-top:2px;color:#333;"><?php echo substr(number_format($outro_valor, 2, ',', '.'), -2); ?></span>
+                </div>
+                <span style="color:#00a650;font-size:12px;font-weight:500;">no Pix <i class="fa-solid fa-chevron-right" style="font-size:8px;"></i></span>
+              </div>
               <div class="produto-relacionado-entrega"><span class="frete-destaque">Frete grátis ⚡ <i>FULL</i></span> <span class="frete-complemento">por ser sua primeira compra</span></div>
             </div>
           </a>
