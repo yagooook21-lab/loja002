@@ -401,7 +401,7 @@ header.compact-mode { padding: 6px 16px; }
 	@media (max-width: 768px) { .footer-main { padding: 30px 15px 20px; margin-top: 40px; } .footer-links-container { gap: 12px; justify-content: center; } .footer-link { font-size: 12px; display: inline-block; } .footer-copyright { font-size: 12px; text-align: center; } .footer-info { font-size: 11px; text-align: center; } }
 	@media (max-width: 480px) { .footer-links-container { gap: 8px; flex-direction: column; align-items: center; } .footer-link { font-size: 11px; display: block; margin-bottom: 4px; } .footer-copyright { font-size: 11px; text-align: center; } .footer-info { font-size: 10px; text-align: center; } }
 	.produto-card { background: #fff; margin-bottom: 8px; padding: 0; }
-	.produto-card, .variacoes-section, .preco-section, .vendedor-section, .caracteristicas-section, .detalhes-section, .descricao-section, .avaliacoes-section, .produtos-relacionados-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
+	.produto-card, .vendedor-section, .caracteristicas-section, .detalhes-section, .descricao-section, .avaliacoes-section, .produtos-relacionados-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
 	.badges-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
 	.pdp-px-16 { padding-left: 16px !important; padding-right: 16px !important; }
 	.rating-row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
