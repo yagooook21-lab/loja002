@@ -60,8 +60,14 @@ if ($id) {
     while ($sql && $row = mysqli_fetch_array($sql)) {
         $nome_loja = $row["nome"] ?? $nome_loja;
     }
-    $logo_files = glob("arquivos/logo/*.png");
-    $logo_loja = !empty($logo_files) ? $logo_files[0] : "";
+    $logo_loja = "";
+    foreach (['png', 'webp', 'jpg', 'jpeg'] as $ext) {
+        $files = glob("arquivos/logo/*." . $ext);
+        if (is_array($files) && count($files) > 0) {
+            $logo_loja = $files[0];
+            break;
+        }
+    }
     ?>
     <!DOCTYPE html>
     <html lang="pt-BR">

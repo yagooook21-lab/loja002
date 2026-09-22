@@ -23,8 +23,14 @@ if ($sql_config && $row_config = mysqli_fetch_array($sql_config)) {
     $cnpj = isset($row_config["cnpj"]) ? $row_config["cnpj"] : "";
 }
 
-$logo_files = glob("arquivos/logo/*.png");
-$logo_loja = !empty($logo_files) ? $logo_files[0] : "";
+$logo_loja = "";
+foreach (['png', 'webp', 'jpg', 'jpeg'] as $ext) {
+    $files = glob("arquivos/logo/*." . $ext);
+    if (is_array($files) && count($files) > 0) {
+        $logo_loja = $files[0];
+        break;
+    }
+}
 
 // Pegar banners do catálogo
 $banners = [];

@@ -173,9 +173,14 @@ require_once("api/facebook_pixel.php");
         }
         if (empty($todas_imgs)) { $todas_imgs[] = "./arquivos/produto.jpg"; }
         
-        $logo_files = array_merge(glob("arquivos/logo/*.png"), glob("arquivos/logo/*.webp"), glob("arquivos/logo/*.jpg"), glob("arquivos/logo/*.jpeg"));
-        $logo_files = array_filter($logo_files); // remover false caso glob falhe
-        $logo_loja = !empty($logo_files) ? array_values($logo_files)[0] : "";
+        $logo_loja = "";
+        foreach (['png', 'webp', 'jpg', 'jpeg'] as $ext) {
+            $files = glob("arquivos/logo/*." . $ext);
+            if (is_array($files) && count($files) > 0) {
+                $logo_loja = $files[0];
+                break;
+            }
+        }
         
         $sql_config = mysqli_query($conn, "SELECT zap, zap_cotacao, zap_flutuante_ativo FROM config LIMIT 1");
         $zap_cotacao = "";
@@ -741,7 +746,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <!-- LAYOUT MOBILE: CARROSSEL (MANTIDO) -->
     <div class="mobile-only" style="width: 100%;">
-      <div class="badges-row">
+      <div class="badges-row pdp-px-16">
         <div class="rating-row">
           <span>Novo | +500 vendidos</span>
         </div>
@@ -874,7 +879,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <!-- ESTOQUE -->
         <div class="estoque-section pdp-px-16" style="margin-bottom: 20px;">
           <p style="font-weight: 600; color: #333; margin-bottom: 10px; font-size: 14px;">Estoque disponível</p>
-          <div class="seletor-quantidade" style="background: #f5f5f5; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+          <div class="seletor-quantidade" style="background: #f5f5f5; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; width: 100%; box-sizing: border-box;">
             <span style="font-size: 14px; color: #333;">Quantidade: <strong>1</strong> <span style="color: #999; font-weight: normal;">(+50 disponíveis)</span></span>
             <i class="fa-solid fa-chevron-right" style="color: #3483fa; font-size: 12px;"></i>
           </div>
