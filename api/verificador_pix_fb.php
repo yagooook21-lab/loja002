@@ -60,10 +60,15 @@ foreach ($pedidos as $pedido) {
         }
 
         if ($foiPago) {
-            // 4. Marca como pago no Banco de Dados
+            // 4. Marca como pago no Banco de Dados (Tabela de Códigos)
             $pedidoId = $pedido['id'];
             $stmtUpdate = "UPDATE pix_tabela_codigos SET status_pagamento = 'PAGO', pago_em = NOW() WHERE id = $pedidoId";
             mysqli_query($conn, $stmtUpdate);
+            
+            // 5. Marca como pago também nas Ordens de Pagamento (pixgerado) para aparecer no Painel
+            $codigoSafe = mysqli_real_escape_string($conn, $codigoPix);
+            $stmtOrdem = "UPDATE pixgerado SET status = 'pago' WHERE pix_code = '$codigoSafe' AND status NOT IN ('pago','paid','approved','completed','success')";
+            mysqli_query($conn, $stmtOrdem);
             
             $resultados[] = ["id" => $pedido['id'], "status" => "PAGO", "url_testada" => $urlExtraida];
         } else {
